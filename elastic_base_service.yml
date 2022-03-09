@@ -1,0 +1,14 @@
+services:
+  elastic:
+    image: arm64v8/elasticsearch:8.0.0
+    environment:
+      cluster.name:                 docker-cluster
+      cluster.initial_master_nodes: es01
+      bootstrap.memory_lock:        true
+      xpack.security.enabled:       false
+      ES_JAVA_OPTS:                 -Xms512m -Xmx512m
+
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1

@@ -1,0 +1,33 @@
+services:
+  elastic_01:
+    extends:
+      file:     ./elastic_base_service.yml
+      service: elastic
+    container_name: es01
+    hostname:       es01
+    environment:
+      node.name:            es01
+      discovery.seed_hosts: es02,es03
+    ports:
+      - 9200:9200
+
+
+  elastic_02:
+    extends:
+      file:     ./elastic_base_service.yml
+      service: elastic
+    container_name: es02
+    hostname:       es02
+    environment:
+      node.name:            es02
+      discovery.seed_hosts: es01,es03
+
+  elastic_03:
+    extends:
+      file: ./elastic_base_service.yml
+      service: elastic
+    container_name: es03
+    hostname:       es03
+    environment:
+      node.name:            es03
+      discovery.seed_hosts: es01,es02
